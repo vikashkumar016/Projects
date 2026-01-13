@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color scheme switcher</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f0f0f0;
+    }
+    .canvas{
+        text-align: center;
+        margin-top: 100px;
+    }
+    .button{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid #000;
+    }
+    #grey{
+        background-color: grey;
+    }
+    #white{
+        background-color: white;
+    }
+    #blue{
+        background-color: blue;
+    }
+    #red{
+        background-color: red;
+    }
+    .div{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: aqua;
+    }
+    .home, .channel{
+        cursor: pointer;
+        border: 2px solid black;
+        height: 30px;
+        padding: 5px;
+        border-radius: 5px;
+
+    }
+
+</style>
+<body>
+      <div class="div
+      ">
+    <span class="home">Home</span>
+    <span class="channel">YouTube Channel</span>
+      </div>
+      <div class="canvas">
+  <h1>Color Scheme Switcher</h1>
+    <span class="button" id="grey"></span>
+    <span class="button" id="white"></span>
+    <span class="button" id="blue"></span>
+    <span class="button" id="red"></span>
+    <h2>Try clicking the buttons above to change the color scheme.
+      <span>to change the background color of this page!</span>        
+    </h2>
+      </div>
+  
+
+</body>
+<script>
+    let btn =document.querySelectorAll('.button');
+    const body = document.querySelector('body');//selecting body element
+    function getRandomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
+    btn.forEach(button =>{
+        button.addEventListener('click',(e)=>{
+            let color = button.id;
+            // body.style.backgroundColor = getRandomColor();//changing background color of body
+            console.log(e);
+            console.log(e.target);
+            if(e.target.id === 'grey'){
+                body.style.backgroundColor = 'grey';
+            }
+            else if(e.target.id === 'white'){
+                body.style.backgroundColor = 'white';
+            }
+            else if(e.target.id === 'blue'){
+                body.style.backgroundColor = 'blue';
+            }
+            else if(e.target.id === 'red'){
+                body.style.backgroundColor = 'red';
+            }
+        });
+    });
+    console.log(btn);
+</script>
+</html>
