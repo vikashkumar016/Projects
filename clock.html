@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+<style>
+     .div {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: rgb(120, 106, 106);
+        }
+        #clock {
+            font-size: 2em;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 20px;
+            text-align: center;
+            background-color: rgb(160, 138, 138);
+            color: white;
+            height: 100px;
+            width: 300px;
+
+        }
+</style>
+
+<body>
+    <div class="div">
+        <span class="home">Home</span>
+        <span class="channel">YouTube Channel</span>
+    </div>
+    <H1>Digital Clock</H1>
+
+    <h2>Your local time is:</h2>
+    <div id="clock">
+
+    </div>
+  <script>
+    let clockDiv = document.getElementById('clock');
+      let date = new Date();
+      console.log(date.toLocaleTimeString());
+
+      setInterval(() => {
+        let date = new Date();
+        clockDiv.innerText = date.toLocaleTimeString();
+      }, 1000);
+  </script>
+</body>
+</html>

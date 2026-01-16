@@ -3,91 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BMI Calculator</title>
+
+    <style>
+        .div {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: rgb(120, 106, 106);
+        }
+
+        .home, .channel {
+            cursor: pointer;
+            border: 2px solid black;
+            height: 30px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<style>
-    .div{
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-        background-color: rgb(120, 106, 106);
-    }
-    .home, .channel{
-        cursor: pointer;
-        border: 2px solid black;
-        height: 30px;
-        padding: 5px;
-        border-radius: 5px;
 
-    }
-    .container{
-        text-align: center;
-        margin-top: 50px;
-    }
-
-</style>
 <body>
-     <div class="div
-      ">
-    <span class="home">Home</span>
-    <span class="channel">YouTube Channel</span>
-      </div>
 
-      <div class="container">
-     <h1>BMI CALCULATOR</h1>
-    
-    <form action="">
-        <label for="height" >Height (in cm): </label>
-        <input type="number" id="height" required>  
-        <br><br>
-        <label for="weight" >Weight (in kg): </label>
-        <input type="number" id="weight" required>  
-        <br><br>   
-        <button type="submit">Calculate BMI</button>
-           <br><br>        
-    </form>
-     <div id="result">
-         
-        </div>
-      </div>
-    
+    <div class="div">
+        <span class="home">Home</span>
+        <span class="channel">YouTube Channel</span>
+    </div>
+
+    <div class="container">
+        <h1>BMI CALCULATOR</h1>
+
+        <form>
+            <label for="height">Height (in cm): </label>
+            <input type="number" id="height" required>
+            <br><br>
+
+            <label for="weight">Weight (in kg): </label>
+            <input type="number" id="weight" required>
+            <br><br>
+
+            <button type="submit">Calculate BMI</button>
+        </form>
+
+        <br>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const heightInput = document.getElementById('height');
+            const weightInput = document.getElementById('weight');
+            const resultDiv = document.getElementById('result');
+
+            const height = parseFloat(heightInput.value);
+            const weight = parseFloat(weightInput.value);
+
+            if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) {
+                resultDiv.innerHTML = `<h3>Please enter valid height and weight values.</h3>`;
+                return;
+            }
+
+            const heightInMeters = height / 100;
+            const bmi = weight / (heightInMeters * heightInMeters);
+
+            let category = "";
+
+            if (bmi < 18.5) {
+                category = "Underweight";
+            } else if (bmi < 25) {
+                category = "Normal weight";
+            } else if (bmi < 30) {
+                category = "Overweight";
+            } else {
+                category = "Obese";
+            }
+
+            resultDiv.innerHTML = `
+                <h3>Your BMI is ${bmi.toFixed(2)}</h3>
+                <h3>Height: ${height} cm</h3>
+                <h3>Weight: ${weight} kg</h3>
+                <h4>Category: ${category}</h4>
+            `;
+
+            // ✅ Clear input fields
+            heightInput.value = "";
+            weightInput.value = "";
+        });
+    </script>
+
 </body>
-<script>
-const form = document.querySelector('form');
-
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const height = parseFloat(document.getElementById('height').value);
-    const weight = parseFloat(document.getElementById('weight').value);
-    const resultDiv = document.getElementById('result');
-
-    if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) {
-        resultDiv.innerHTML = `<h3>Please enter valid height and weight values.</h3>`;
-        return;
-    }
-
-    const heightInMeters = height / 100;
-    const bmi = weight / (heightInMeters * heightInMeters);
-
-    let category = "";
-
-    if (bmi < 18.5) {
-        category = "Underweight";
-    } else if (bmi >= 18.5 && bmi < 25) {
-        category = "Normal weight";
-    } else if (bmi >= 25 && bmi < 30) {
-        category = "Overweight";
-    } else {
-        category = "Obese";
-    }
-
-    resultDiv.innerHTML = `
-        <h3>Your BMI is ${bmi.toFixed(2)}</h3>
-        <h4>Category: ${category}</h4>
-    `;
-});
-</script>
-
 </html>
